@@ -15,7 +15,12 @@ app.get("/cryptos", (req, res) => {
   fetch(CRYPTO_URL)
     .then((resp) => resp.json())
     .then((jsondata) => {
-      res.json(jsondata);
+        var dat = jsondata.map((item) => ({
+            value: item.id,
+            label: item.name,
+            url:item.image
+          }));
+        res.json(dat);
     });
 });
 
@@ -23,7 +28,11 @@ app.get("/currencies", (req, res) => {
   fetch(CURRENCIES_URL)
     .then((resp) => resp.json())
     .then((jsondata) => {
-      res.json(jsondata);
+        var curr = jsondata.map((item) => ({
+            value: item,
+            label: item,
+          }));
+      res.json(curr);
     });
 });
 
